@@ -64,7 +64,6 @@ function TournamentColumn(props) {
             <Th>Matches of the Tournament</Th>
             <Th>Participant of the Tournament</Th>
             <Th>Update Tournament</Th>
-
           </Tr>
         </Thead>
         <Tbody>
