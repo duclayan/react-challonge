@@ -8,8 +8,6 @@ import {
   Select,
 } from "@chakra-ui/react";
 import FormSubHeading from "./forms/formSubheading";
-import { RegularInput } from "./forms/regularInput";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 
 export default class CreateTournament extends React.Component {
@@ -21,8 +19,6 @@ export default class CreateTournament extends React.Component {
 
   handleChange = (event, key) => {
     const { name, value } = event.target;
-    console.log("handle change");
-    console.log("key", name, value);
     this.setState({ [name]: value });
   };
 
