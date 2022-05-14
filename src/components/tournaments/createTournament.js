@@ -13,12 +13,7 @@ export function CreateTournament(props) {
   } = useForm();
 
   const [tournament_name, setName] = useState("");
-  const [tournamentType, setTournamentType] = useState("");
-  const [url, setUrl] = useState("");
-  const [subdomain, setSubdomain] = useState("");
   const [tournament_description, setDescription] = useState("");
-  const [openSignup, setOpenSignup] = useState("");
-
 
 function onSubmit(e) {
 
