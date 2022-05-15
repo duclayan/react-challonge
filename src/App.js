@@ -1,5 +1,5 @@
 import "./App.css";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Stack } from "@chakra-ui/react";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import TournamentColumn from "./components/tournaments/tournaments";
@@ -14,8 +14,15 @@ function App() {
     <>
       {/* Creating the routers for Tournaments, Matches and Participants */}
       <ChakraProvider>
-        {/* Renders Nav-bar */}
-        <WithSubnavigation />
+                {/* Renders Nav-bar */}
+                <WithSubnavigation />
+      <Stack
+        textAlign={"center"}
+        align={"center"}
+        spacing={{ base: 8, md: 10 }}
+        py={{ base: 20, md: 28 }}
+      > 
+
         <Routes>
           {/* Home */}
           <Route path="/" element={<Challonge />} exact />
@@ -52,6 +59,8 @@ function App() {
           />
           <Route element={Error} />
         </Routes>
+      </Stack>
+      
       </ChakraProvider>
     </>
   );
