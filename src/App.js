@@ -18,23 +18,35 @@ function App() {
         {/* Renders Nav-bar */}
         <WithSubnavigation />
         <Routes>
+
+          {/* Home */}
           <Route path="/" element={<Challonge />} exact />
+
+          {/* Tournament List */}
           <Route path="/tournaments" element={<TournamentColumn />} exact />
+
+          {/* Create new tournament */}
           <Route
             path="/tournament/create"
             element={<CreateTournament />}
             exact
           />
+
+          {/* Update tournament */}
           <Route
             path="/tournament/:tournament_id"
             element={<CreateTournament />}
             exact
           />
+
+          {/* Matches inside a tournament */}
           <Route
             path="/tournament/:tournament_id/matches"
             element={<MatchesColumn />}
             exact
           />
+
+          {/* Participants inside a tournament */}
           <Route
             path="/tournament/:tournament_id/participants"
             element={<ParticipantsColumn />}
