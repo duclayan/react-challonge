@@ -17,7 +17,6 @@ function App() {
         {/* Renders Nav-bar */}
         <WithSubnavigation />
         <Routes>
-
           {/* Home */}
           <Route path="/" element={<Challonge />} exact />
 
