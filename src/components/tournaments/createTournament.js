@@ -12,24 +12,31 @@ import axios from "axios";
 import { challonge_api, withRouter } from "../../utils/utils";
 
 class CreateTournament extends React.Component {
-  state= {
+  state = {
     api_key: challonge_api.apiKey,
-    id: parseInt(this.props.router.params.tournament_id)
+    id: parseInt(this.props.router.params.tournament_id),
   };
 
-
   handleChange = (event) => {
-    console.log(!!this.state.id)
+    console.log(!!this.state.id);
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    if((!!this.state.id)) {
-      axios.put(`${challonge_api.baseURL}/tournaments/${this.state.id}.json`, {...this.state}).then((res)=> console.log('UPDATE'))
+    if (!!this.state.id) {
+      axios
+        .put(`${challonge_api.baseURL}/tournaments/${this.state.id}.json`, {
+          ...this.state,
+        })
+        .then((res) => console.log("UPDATE"));
     } else {
-      axios.post("https://api.challonge.com/v1/tournaments.json", {...this.state}).then((res) => console.log('CREATE'));
+      axios
+        .post("https://api.challonge.com/v1/tournaments.json", {
+          ...this.state,
+        })
+        .then((res) => console.log("CREATE"));
     }
   };
 
