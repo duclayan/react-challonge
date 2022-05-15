@@ -8,7 +8,6 @@ import MatchesColumn from "../matches/matches";
 import ParticipantsColumn from "../participants/participants";
 import { Link } from "react-router-dom";
 import { withRouter } from "next/router";
-import CallToActionWithAnnotation from "../heading/Header";
 import CreateTournament from "./createTournament";
 
 function TournamentColumn(props) {
