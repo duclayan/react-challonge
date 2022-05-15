@@ -24,22 +24,26 @@ import CreateTournament from "./createTournament";
 import LoadingScreen from "../chakra/loading";
 
 function TournamentColumn(props) {
-  const apiKey = `8KKWQ4LPxEjTdW0FRpZj6t87z0yjnyDquMjiaqGY`;
-  const userName = `duclayan`;
-  const apiUrl = `http://${userName}:${apiKey}@api.challonge.com/v1/tournaments.json`;
   const maximum_length = 10;
   const [tournaments, setTournaments] = useState();
   const [displayTournament, setDisplayTournament] = useState();
   const [isLoading, setIsLoading] = useState();
-  const [showSpinner, setShowSpinner] = useState(true);
   const [render, setRender] = useState(false);
-  console.log(process.env);
+
+
+  const apiKey = `8KKWQ4LPxEjTdW0FRpZj6t87z0yjnyDquMjiaqGY`;
+  const userName = `duclayan`;
+  const apiUrl = `http://${userName}:${apiKey}@api.challonge.com/v1/tournaments.json`;
+  
   async function getData() {
     await axios
       .get(apiUrl, { auth: { username: userName, password: apiKey } })
       .then((results) => {
         setTournaments(results.data);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log('error', err)
       });
   }
 
@@ -129,8 +133,7 @@ function TournamentColumn(props) {
                   <Td key="${list.tournament.id}"> {list.tournament.name} </Td>
                   
                   <Td align={"center"}>
-                    <Stack direction={"row"} spacing={8} align={"center"}
->
+                    <Stack direction={"row"} spacing={8} align={"center"}>
                       <Link
                         to={{
                           pathname: `/tournament/${list.tournament.id}`,
@@ -143,7 +146,7 @@ function TournamentColumn(props) {
                       <Link
                         to={{
                           pathname: `/tournament/${list.tournament.id}/matches`,
-                          state: { router: list.tournament_id },
+                          state: { router: list.tournament.id},
                         }}
                       >
                         <Button>Matches</Button>
