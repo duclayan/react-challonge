@@ -15,12 +15,8 @@ import {
   Text,
   Stack,
 } from "@chakra-ui/react";
-import { Spinner } from "reactstrap";
-import MatchesColumn from "../matches/matches";
-import ParticipantsColumn from "../participants/participants";
 import { Link } from "react-router-dom";
 import { withRouter } from "next/router";
-import CreateTournament from "./createTournament";
 import LoadingScreen from "../chakra/loading";
 
 function TournamentColumn(props) {
