@@ -11,25 +11,12 @@ import {
 import FormSubHeading from "./forms/formSubheading";
 import axios from "axios";
 
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return <Component {...props} router={{ location, navigate, params }} />;
-  }
-
-  return ComponentWithRouterProp;
-}
-
+import { challonge_api, withRouter } from "../../utils/utils";
 class UpdateTournament extends React.Component {
-  state = {
-    name: "sample",
-    description: "",
-    tournament_type: "",
-    id: null,
+
+  state= {
+    api_key: challonge_api.apiKey,
+    id: parseInt(this.props.router.params.tournament_id)
   };
 
   handleChange = (event) => {
@@ -39,38 +26,10 @@ class UpdateTournament extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    
+    const tournament = {...this.state};
 
-    const tournament = {
-      id: parseInt(this.props.router.params.tournament_id),
-      api_key: "8KKWQ4LPxEjTdW0FRpZj6t87z0yjnyDquMjiaqGY",
-      name: this.state.name,
-      description: this.state.description,
-      tournament_type: this.state.tournament_type,
-    };
-
-    console.log("tournament output", tournament);
-    const apiKey = `8KKWQ4LPxEjTdW0FRpZj6t87z0yjnyDquMjiaqGY`;
-    const userName = `duclayan`;
-
-    axios
-      .put(
-        `http://api.challonge.com/v1/tournaments/${tournament.id}.json?api_key=${apiKey}&tournament[tournament_type]=${this.state.tournament_type}`
-      )
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.response) {
-          console.log("response", error.response);
-          console.log("tournamentid", tournament.id);
-        } else if (error.request) {
-          console.log("request", error.request);
-        } else if (error.message) {
-          console.log("message", error.message);
-        }
-      });
+    axios.put(`${challonge_api.baseURL}/tournaments/${tournament.id}.json`, {tournament}).then((res)=> console.log('success'))
   };
 
   render() {

@@ -19,7 +19,7 @@ function TournamentColumn(props) {
   const [displayTournament, setDisplayTournament] = useState();
   const [isLoading, setIsLoading] = useState();
   const [render, setRender] = useState(false);
-
+  console.log(process.env)
   async function getData() {
     await axios
       .get(apiUrl, { auth: { username: userName, password: apiKey } })
