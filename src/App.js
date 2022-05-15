@@ -1,9 +1,8 @@
 import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
-import React, { Component } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import TournamentColumn from "./components/tournaments/tournaments";
-import CallToActionWithAnnotation from "./components/heading/Header";
 import WithSubnavigation from "./components/heading/Navbar";
 import CreateTournament from "./components/tournaments/createTournament";
 import Challonge from "./components/challonge";
