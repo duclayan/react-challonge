@@ -1,4 +1,5 @@
-import React, { Component, useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import {
   Heading,
   Container,
@@ -10,11 +11,25 @@ import {
 import FormSubHeading from "./forms/formSubheading";
 import axios from "axios";
 
-export default class CreateTournament extends React.Component {
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
+function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{ location, navigate, params }} />;
+  }
+
+  return ComponentWithRouterProp;
+}
+
+class UpdateTournament extends React.Component {
   state = {
-    name: "",
+    name: "sample",
     description: "",
     tournament_type: "",
+    id: null,
   };
 
   handleChange = (event) => {
@@ -26,16 +41,35 @@ export default class CreateTournament extends React.Component {
     event.preventDefault();
 
     const tournament = {
+      id: parseInt(this.props.router.params.tournament_id),
+      api_key: "8KKWQ4LPxEjTdW0FRpZj6t87z0yjnyDquMjiaqGY",
       name: this.state.name,
       description: this.state.description,
       tournament_type: this.state.tournament_type,
     };
 
+    console.log("tournament output", tournament);
+    const apiKey = `8KKWQ4LPxEjTdW0FRpZj6t87z0yjnyDquMjiaqGY`;
+    const userName = `duclayan`;
+
     axios
-      .post("https://api.challonge.com/v1/tournaments.json", { tournament })
+      .put(
+        `http://api.challonge.com/v1/tournaments/${tournament.id}.json?api_key=${apiKey}&tournament[tournament_type]=${this.state.tournament_type}`
+      )
       .then((res) => {
         console.log(res);
         console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response) {
+          console.log("response", error.response);
+          console.log("tournamentid", tournament.id);
+        } else if (error.request) {
+          console.log("request", error.request);
+        } else if (error.message) {
+          console.log("message", error.message);
+        }
       });
   };
 
@@ -45,8 +79,10 @@ export default class CreateTournament extends React.Component {
         <Container maxW={"3xl"}>
           <form onSubmit={this.handleSubmit}>
             <Heading color={"green.400"} fontSize="50px">
-              New Tournament
+              Update Tournament
             </Heading>
+
+            <h3> `${this.state.name}</h3>
 
             <FormSubHeading title="Basic Info" />
 
@@ -90,3 +126,5 @@ export default class CreateTournament extends React.Component {
     );
   }
 }
+
+export default withRouter(UpdateTournament);

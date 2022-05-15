@@ -2,10 +2,14 @@ import React, { useState } from "react";
 
 import { useEffect } from "react";
 import axios from "axios";
-import { Table, Td, Th, Tr, Thead, Tbody } from "@chakra-ui/react";
+import { Table, Td, Th, Tr, Thead, Tbody, Button } from "@chakra-ui/react";
 import { Spinner } from "reactstrap";
 import MatchesColumn from "../matches/matches";
 import ParticipantsColumn from "../participants/participants";
+import { Link } from "react-router-dom";
+import { withRouter } from "next/router";
+import CallToActionWithAnnotation from "../heading/Header";
+import CreateTournament from "./createTournament";
 
 function TournamentColumn(props) {
   const apiKey = `8KKWQ4LPxEjTdW0FRpZj6t87z0yjnyDquMjiaqGY`;
@@ -57,38 +61,51 @@ function TournamentColumn(props) {
 
   if (render === true) {
     return (
-      <Table>
-        <Thead>
-          <Tr>
-            <Th>Name of Tournament</Th>
-            <Th>Matches of the Tournament</Th>
-            <Th>Participant of the Tournament</Th>
-            <Th>Update Tournament</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {displayTournament.slice(0, maximum_length).map((list, index) => (
+      <>
+        <CreateTournament />
+        <Table>
+          <Thead>
             <Tr>
-              <Td key="${list.tournament.id}"> {list.tournament.id} </Td>
-              <Td>
-                {" "}
-                <MatchesColumn
-                  key="tournament_matches"
-                  tournament_id={list.tournament.id}
-                />{" "}
-              </Td>
-              <Td>
-                {" "}
-                <ParticipantsColumn
-                  key="tournament_participants"
-                  tournament_id={list.tournament.id}
-                />
-              </Td>
+              <Th>Name of Tournament</Th>
+              <Th>Matches of the Tournament</Th>
+              <Th>Participant of the Tournament</Th>
+              <Th>Update Tournament</Th>
             </Tr>
-          ))}
-        </Tbody>
-      </Table>
+          </Thead>
+          <Tbody>
+            {displayTournament.slice(0, maximum_length).map((list, index) => (
+              <Tr>
+                <Td key="${list.tournament.id}"> {list.tournament.id} </Td>
+                <Td>
+                  {" "}
+                  <MatchesColumn
+                    key="tournament_matches"
+                    tournament_id={list.tournament.id}
+                  />{" "}
+                </Td>
+                <Td>
+                  {" "}
+                  <ParticipantsColumn
+                    key="tournament_participants"
+                    tournament_id={list.tournament.id}
+                  />
+                </Td>
+                <Td>
+                  <Link
+                    to={{
+                      pathname: `/tournament/${list.tournament.id}`,
+                      state: { router: list.tournament_id },
+                    }}
+                  >
+                    <Button>Update</Button>
+                  </Link>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </>
     );
   }
 }
-export default TournamentColumn;
+export default withRouter(TournamentColumn);
