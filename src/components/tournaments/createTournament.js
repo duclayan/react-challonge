@@ -27,10 +27,10 @@ class CreateTournament extends React.Component {
     event.preventDefault();
     if (!!this.state.id) {
       axios
-        .put(`${challonge_api.baseURL}/tournaments/${this.state.id}.json`, {
-          ...this.state,
-        })
-        .then((res) => console.log("UPDATE"));
+      .put(
+        `http://api.challonge.com/v1/tournaments/${this.state.id}.json?api_key=${challonge_api.apiKey}&tournament[tournament_type]=${this.state.tournament_type}&tournament[name]=${this.state.name}`
+      ) .then((res) => console.log("UPDATE",res))
+        .catch((err) => console.log(err));
     } else {
       axios
         .post("https://api.challonge.com/v1/tournaments.json", {

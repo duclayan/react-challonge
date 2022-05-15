@@ -31,11 +31,6 @@ function App() {
             exact
           />
           <Route
-            path="/tournament/:tournament_id"
-            element={<CreateTournament />}
-            exact
-          />
-          <Route
             path="/tournament/:tournament_id/matches"
             element={<MatchesColumn />}
             exact
