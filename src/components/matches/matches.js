@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 import { useEffect } from "react";
 import axios from "axios";
-import { Heading, Container, Stack} from "@chakra-ui/react";
+import { Heading, Container, Stack, Table, Thead, Tr, Th, Tbody, Button, Td} from "@chakra-ui/react";
 import { challonge_api, getURL } from "../../utils/utils";
-import { useParams } from "react-router-dom";
+import { useParams, Link} from "react-router-dom";
+import { Title } from "../heading/Title";
 
 function MatchesColumn() {
   const [matches, setMatches] = useState();
@@ -46,9 +47,34 @@ function MatchesColumn() {
     {
       return (
         <>  
-            {matches.map((list, index) => (
-              <h3> {list.match.id} </h3>
-            ))}
+            <Title titleBig ={'this is your'} titleSmall = {'matches'} buttonCaption = {'back to Tournaments'} path = {'/tournaments'}/>
+
+            <Table>
+            <Thead>
+              <Tr>
+                <Th>Name of Tournament</Th>
+                <Th> Started at</Th>
+                <Th> Updated at </Th>
+
+              </Tr>
+            </Thead>
+            <Tbody>
+
+              {matches.map((list, index) => (
+                <Tr
+                  _hover={{
+                    background: "orange.200",
+                    color: "white.600",
+                  }}
+                >
+                  <Td key="${list.tournament.id}"> Match ID {list.match.id} </Td>
+                  <Td key="${list.tournament.id}"> {list.match.started_at} </Td>
+                  <Td key="${list.tournament.id}"> {list.match.updated_at} </Td>
+                </Tr>   
+              ))}
+            </Tbody>
+          </Table>
+
         </>
       );
     }
