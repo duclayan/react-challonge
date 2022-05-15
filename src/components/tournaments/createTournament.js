@@ -9,13 +9,10 @@ import {
 } from "@chakra-ui/react";
 import FormSubHeading from "./forms/formSubheading";
 import axios from "axios";
+import RegularInput from "./forms/regularInput";
 
 export default class CreateTournament extends React.Component {
-  state = {
-    name: "",
-    description: "",
-    tournament_type: "",
-  };
+  state = {};
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,15 +21,7 @@ export default class CreateTournament extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
-    const tournament = {
-      name: this.state.name,
-      description: this.state.description,
-      tournament_type: this.state.tournament_type,
-    };
-
-    axios
-      .post("https://api.challonge.com/v1/tournaments.json", { tournament })
+    axios.post("https://api.challonge.com/v1/tournaments.json", {...this.state})
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -67,7 +56,7 @@ export default class CreateTournament extends React.Component {
               name="description"
               onChange={this.handleChange}
             />
-
+            
             <FormLabel htmlFor="tournament-description">Format </FormLabel>
             <Select
               placeholder="Select option"
