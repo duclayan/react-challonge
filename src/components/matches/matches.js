@@ -6,6 +6,7 @@ import { Heading, Container, Stack, Table, Thead, Tr, Th, Tbody, Button, Td} fro
 import { challonge_api, getURL } from "../../utils/utils";
 import { useParams, Link} from "react-router-dom";
 import { Title } from "../heading/Title";
+import { TournamentButton } from "../chakra/tournamentButton";
 
 function MatchesColumn() {
   const [matches, setMatches] = useState();
@@ -39,6 +40,7 @@ function MatchesColumn() {
             py={{ base: 20, md: 28 }}
           >
             <Heading> SORRY CURRENTLY THERE IS NO MATCH AVAILABLE</Heading>
+            <TournamentButton />
           </Stack>
         </Container>
         </>
