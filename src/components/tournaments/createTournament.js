@@ -29,7 +29,10 @@ class CreateTournament extends React.Component {
       axios
       .put(
         `http://api.challonge.com/v1/tournaments/${this.state.id}.json?api_key=${challonge_api.apiKey}&tournament[tournament_type]=${this.state.tournament_type}&tournament[name]=${this.state.name}`
-      ) .then((res) => console.log("UPDATE",res))
+      ) .then((res) => {
+        console.log("UPDATE")
+        window.location.href = '/tournaments'
+      })
         .catch((err) => console.log(err));
     } else {
       axios
