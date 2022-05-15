@@ -3,22 +3,16 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { Tr, Tbody } from "@chakra-ui/react";
+import { challonge_api, getURL } from "../../utils/utils";
 
 function ParticipantsColumn(props) {
   const [tournament_id, setTournamentId] = useState(props.tournament_id);
   const [participants, setParticipants] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
-
-  const apiKey = `8KKWQ4LPxEjTdW0FRpZj6t87z0yjnyDquMjiaqGY`;
-  const userName = `duclayan`;
-  const apiUrl = `http://${userName}:${apiKey}@api.challonge.com/v1/tournaments/${tournament_id}/participants.json`;
+  const apiUrl = getURL(tournament_id, 'participants');
 
   async function getData() {
-    await axios
-      .get(apiUrl, { auth: { username: userName, password: apiKey } })
-      .then((results) => {
-        setParticipants(results.data);
-      })
+    await axios.get(apiUrl, { auth: { ...challonge_api} })
       .catch((error) => {
         console.log("error:", error);
       });

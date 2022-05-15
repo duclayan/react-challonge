@@ -6,9 +6,7 @@ import TournamentColumn from "./components/tournaments/tournaments";
 import CallToActionWithAnnotation from "./components/heading/Header";
 import WithSubnavigation from "./components/heading/Navbar";
 import CreateTournament from "./components/tournaments/createTournament";
-import UpdateTournament from "./components/tournaments/updateTournament";
-const apiKey = `8KKWQ4LPxEjTdW0FRpZj6t87z0yjnyDquMjiaqGY`;
-const userName = `duclayan`;
+import Challonge from "./components/challonge";
 
 function App () {
     return (
@@ -16,11 +14,14 @@ function App () {
         {/* Creating the routers for Tournaments, Matches and Participants */}
         <ChakraProvider>
           <Routes>
-            <Route path='/' element={<TournamentColumn/>} exact/>
-            <Route path='/createTournament' element={<CreateTournament/>} exact/>
-            <Route path='/tournament/:tournament_id' element={<UpdateTournament/>} exact />
+            <Route path='/' element={<Challonge/>} exact/>
+            <Route path='/tournaments' element={<TournamentColumn/>} exact/>
+            <Route path='/tournament/create' element={<CreateTournament/>} exact/>
+            <Route path='/tournament/:tournament_id' element={<CreateTournament/>} exact />
             <Route element={Error} />
           </Routes>
+
+
         </ChakraProvider>
       </>
     );

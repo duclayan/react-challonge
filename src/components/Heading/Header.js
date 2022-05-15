@@ -10,7 +10,10 @@ import {
   Icon,
   useColorModeValue,
   createIcon,
+  Flex,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { Illustration } from "../../utils/illustration";
 
 export default function CallToActionWithAnnotation() {
   return (
@@ -54,20 +57,46 @@ export default function CallToActionWithAnnotation() {
             alignSelf={"center"}
             position={"relative"}
           >
-            <Button
-              colorScheme={"green"}
-              bg={"green.400"}
-              rounded={"full"}
-              px={6}
-              _hover={{
-                bg: "green.500",
+            <Link
+              to={{
+                pathname: `/tournament/create`,
               }}
             >
-              Create a Tournament
-            </Button>
+              <Button
+                colorScheme={"green"}
+                bg={"green.400"}
+                rounded={"full"}
+                px={6}
+                _hover={{
+                  bg: "green.500",
+                }}
+              >
+                Create a Tournament
+              </Button>
+            </Link>
+
+            <Link
+              to={{
+                pathname: `/tournaments`,
+              }}
+            >
+              <Button
+                colorScheme={"green"}
+                bg={"green.400"}
+                rounded={"full"}
+                px={6}
+                _hover={{
+                  bg: "green.500",
+                }}
+              >
+                My Tournaments
+              </Button>
+            </Link>
+
             <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
               Learn more
             </Button>
+           
             <Box>
               <Icon
                 as={Arrow}

@@ -2,21 +2,19 @@ import React, { useState } from "react";
 
 import { useEffect } from "react";
 import axios from "axios";
-import { Table, Td, Th, Tr, Thead, Tbody } from "@chakra-ui/react";
-import { Spinner } from "reactstrap";
+import {Tr,Tbody } from "@chakra-ui/react";
+import { challonge_api, getURL } from "../../utils/utils";
 
 function MatchesColumn(props) {
   const [tournament_id, setTournamentId] = useState(props.tournament_id);
   const [matches, setMatches] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const apiKey = `8KKWQ4LPxEjTdW0FRpZj6t87z0yjnyDquMjiaqGY`;
-  const userName = `duclayan`;
-  const apiUrl = `http://${userName}:${apiKey}@api.challonge.com/v1/tournaments/${tournament_id}/matches.json`;
+  const apiUrl = getURL(tournament_id, 'matches')
 
   async function getData() {
     await axios
-      .get(apiUrl, { auth: { username: userName, password: apiKey } })
+      .get(apiUrl, { auth: { ...challonge_api} })
       .then((results) => {
         setMatches(results.data);
       })

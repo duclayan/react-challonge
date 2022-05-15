@@ -9,23 +9,28 @@ import {
 } from "@chakra-ui/react";
 import FormSubHeading from "./forms/formSubheading";
 import axios from "axios";
-import RegularInput from "./forms/regularInput";
+import { challonge_api, withRouter } from "../../utils/utils";
 
-export default class CreateTournament extends React.Component {
-  state = {};
+class CreateTournament extends React.Component {
+  state= {
+    api_key: challonge_api.apiKey,
+    id: parseInt(this.props.router.params.tournament_id)
+  };
+
 
   handleChange = (event) => {
+    console.log(!!this.state.id)
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    axios.post("https://api.challonge.com/v1/tournaments.json", {...this.state})
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-      });
+    if((!!this.state.id)) {
+      axios.put(`${challonge_api.baseURL}/tournaments/${this.state.id}.json`, {...this.state}).then((res)=> console.log('UPDATE'))
+    } else {
+      axios.post("https://api.challonge.com/v1/tournaments.json", {...this.state}).then((res) => console.log('CREATE'));
+    }
   };
 
   render() {
@@ -56,7 +61,6 @@ export default class CreateTournament extends React.Component {
               name="description"
               onChange={this.handleChange}
             />
-            
             <FormLabel htmlFor="tournament-description">Format </FormLabel>
             <Select
               placeholder="Select option"
@@ -79,3 +83,4 @@ export default class CreateTournament extends React.Component {
     );
   }
 }
+export default withRouter(CreateTournament);
