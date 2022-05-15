@@ -17,6 +17,9 @@ class CreateTournament extends React.Component {
     id: parseInt(this.props.router.params.tournament_id),
   };
 
+  copy = {
+    heading: (!!this.state.id) ? 'Update Tournament' : ' New Tournament'
+  }
   handleChange = (event) => {
     console.log(!!this.state.id);
     const { name, value } = event.target;
@@ -49,7 +52,7 @@ class CreateTournament extends React.Component {
         <Container maxW={"3xl"}>
           <form onSubmit={this.handleSubmit}>
             <Heading color={"green.400"} fontSize="50px">
-              New Tournament
+              {this.copy.heading}
             </Heading>
 
             <FormSubHeading title="Basic Info" />
