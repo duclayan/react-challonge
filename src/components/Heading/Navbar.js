@@ -86,7 +86,7 @@ export default function WithSubnavigation() {
 
           <Link
             to={{
-              pathname: "/tournaments",
+              pathname: "/tournament/create",
             }}
           >
             <Button
