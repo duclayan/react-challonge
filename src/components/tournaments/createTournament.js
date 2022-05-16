@@ -7,7 +7,7 @@ import {
   FormLabel,
   Select,
 } from "@chakra-ui/react";
-import FormSubHeading from "./forms/formSubheading";
+import FormSubHeading from "../chakra/forms/formSubheading";
 import axios from "axios";
 import { challonge_api, withRouter } from "../../utils/utils";
 
@@ -42,7 +42,10 @@ class CreateTournament extends React.Component {
         .post("https://api.challonge.com/v1/tournaments.json", {
           ...this.state,
         })
-        .then((res) => console.log("CREATE"));
+        .then((res) => {
+          console.log("CREATE")
+          window.location.href = '/tournaments'
+        })
     }
   };
 

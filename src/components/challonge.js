@@ -1,11 +1,8 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import React, { Component } from "react";
-import { Navbar } from "reactstrap";
+import React from "react";
 import LargeWithAppLinksAndSocial from "./chakra/footer";
 import GridBlurredBackdrop from "./chakra/testimonials";
-import CallToActionWithAnnotation from "./heading/Header";
-import WithSubnavigation from "./heading/Navbar";
-
+import CallToActionWithAnnotation from "./chakra/heading/Header"
 function Challonge() {
   return (
     <>

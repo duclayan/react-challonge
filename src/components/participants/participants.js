@@ -15,8 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { challonge_api, getURL } from "../../utils/utils";
 import { useParams } from "react-router-dom";
-import { Title } from "../heading/Title";
 import { TournamentButton } from "../chakra/tournamentButton";
+import { Title } from "../chakra/heading/Title";
 
 function ParticipantsColumn(props) {
   const [participants, setParticipants] = useState();

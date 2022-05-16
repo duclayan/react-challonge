@@ -5,8 +5,8 @@ import axios from "axios";
 import { Heading, Container, Stack, Table, Thead, Tr, Th, Tbody, Button, Td} from "@chakra-ui/react";
 import { challonge_api, getURL } from "../../utils/utils";
 import { useParams, Link} from "react-router-dom";
-import { Title } from "../heading/Title";
 import { TournamentButton } from "../chakra/tournamentButton";
+import { Title } from "../chakra/heading/Title";
 
 function MatchesColumn() {
   const [matches, setMatches] = useState();
