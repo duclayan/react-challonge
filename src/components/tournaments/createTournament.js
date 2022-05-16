@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import {
   Heading,
   Container,
@@ -21,7 +21,6 @@ class CreateTournament extends React.Component {
     heading: (!!this.state.id) ? 'Update Tournament' : ' New Tournament'
   }
   handleChange = (event) => {
-    console.log(!!this.state.id);
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -30,22 +29,13 @@ class CreateTournament extends React.Component {
     event.preventDefault();
     if (!!this.state.id) {
       axios
-      .put(
-        `http://api.challonge.com/v1/tournaments/${this.state.id}.json?api_key=${challonge_api.apiKey}&tournament[tournament_type]=${this.state.tournament_type}&tournament[name]=${this.state.name}`
-      ) .then((res) => {
-        console.log("UPDATE")
-        window.location.href = '/tournaments'
-      })
+        .put(`http://api.challonge.com/v1/tournaments/${this.state.id}.json?api_key=${challonge_api.apiKey}&tournament[tournament_type]=${this.state.tournament_type}&tournament[name]=${this.state.name}`) 
+        .then((res) => {window.location.href = '/tournaments'})
         .catch((err) => console.log(err));
     } else {
       axios
-        .post("https://api.challonge.com/v1/tournaments.json", {
-          ...this.state,
-        })
-        .then((res) => {
-          console.log("CREATE")
-          window.location.href = '/tournaments'
-        })
+        .post("https://api.challonge.com/v1/tournaments.json", {...this.state,})
+        .then((res) => {window.location.href = '/tournaments'})
     }
   };
 
